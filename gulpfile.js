@@ -4,9 +4,12 @@ var gulp = require('gulp'),
 	compass = require('gulp-compass'),
 	jade = require('gulp-jade');
 
-gulp.task('sass', function() {
+gulp.task('compass', function() {
 	gulp.src('./scss/*.scss')
-		.pipe(sass())
+		.pipe(compass({
+			css: './css',
+			sass: './scss',
+		}))
 		.pipe(gulp.dest('./css'));
 });
 
@@ -22,9 +25,9 @@ gulp.task('jade', function() {
 		.pipe(gulp.dest('./'));
 });
 
-gulp.task('default', ['sass', 'coffee', 'jade']);
+gulp.task('default', ['compass', 'coffee', 'jade']);
 
-gulp.watch('./scss/**/*.scss', ['sass']);
+gulp.watch('./scss/**/*.scss', ['compass']);
 
 gulp.watch('./coffee/*.coffee', ['coffee']);
 
